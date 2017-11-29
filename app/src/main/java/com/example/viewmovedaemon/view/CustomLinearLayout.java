@@ -3,6 +3,7 @@ package com.example.viewmovedaemon.view;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
@@ -24,8 +25,8 @@ public class CustomLinearLayout extends LinearLayout {
         scroller = new Scroller(context);
 
 
-
     }
+
 
     //缓慢滚动到指定位置
     public void smoothScrollTo(int destX, int destY, int duration) {
@@ -39,6 +40,7 @@ public class CustomLinearLayout extends LinearLayout {
 
         scroller.startScroll(scrollX, 0, deltaX, deltaY, duration * 1000);
         invalidate();
+
 
     }
 

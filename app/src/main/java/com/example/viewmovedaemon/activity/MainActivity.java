@@ -1,10 +1,12 @@
-package com.example.viewmovedaemon;
+package com.example.viewmovedaemon.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.viewmovedaemon.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(MainActivity.this, SlidingHidActivity.class));
             }
         });
 

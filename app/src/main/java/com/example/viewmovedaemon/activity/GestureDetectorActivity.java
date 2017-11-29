@@ -1,4 +1,4 @@
-package com.example.viewmovedaemon;
+package com.example.viewmovedaemon.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
@@ -8,6 +8,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.viewmovedaemon.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

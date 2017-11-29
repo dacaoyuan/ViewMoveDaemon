@@ -1,20 +1,24 @@
-package com.example.viewmovedaemon;
+package com.example.viewmovedaemon.activity;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.viewmovedaemon.R;
 import com.example.viewmovedaemon.view.CustomLinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ViewMoveActivity extends AppCompatActivity {
+    private static final String TAG = "ViewMoveActivity";
     @BindView(R.id.textView)
     TextView textView;
     @BindView(R.id.button)
@@ -27,7 +31,7 @@ public class ViewMoveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_move);
         ButterKnife.bind(this);
-        // moveMethod1();
+        moveMethod3();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,34 +44,41 @@ public class ViewMoveActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        moveMethod4();
+        // moveMethod4();
         // moveMethod44();
         // moveMethod3();
+        Log.i(TAG, "moveMethod1:移动后 getX()=" + button.getX() + " getY= " + button.getY());
+        Log.i(TAG, "moveMethod1:移动后 getLeft()=" + button.getLeft() + " getTop()= " + button.getTop());
     }
 
     //scrollTo,scrollBy
     public void moveMethod1() {
+        Log.i(TAG, "moveMethod1:移动前 getX()=" + button.getX() + " getY= " + button.getY());
+        Log.i(TAG, "moveMethod1:移动前 getLeft()=" + button.getLeft() + " getTop()= " + button.getTop());
         //向右和向下移动都为 -（负值）
         //View view = (View) button.getParent();
         //view.scrollBy((int) getResources().getDimension(R.dimen.px_500), (int) getResources().getDimension(R.dimen.px_500));
         linear.scrollBy((int) getResources().getDimension(R.dimen.px_500), (int) getResources().getDimension(R.dimen.px_500));
+
+
     }
 
     //属性动画
     public void moveMethod2() {
 
-       /* AnimatorSet animatorSet = new AnimatorSet();
+
+        /*AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(
-                ObjectAnimator.ofFloat(button, "translationX", 0, 500).setDuration(6 * 1000),
-                ObjectAnimator.ofFloat(button, "translationY", 0, 500).setDuration(6 * 1000)
+                ObjectAnimator.ofFloat(button, "translationX", 0, 500),//.setDuration(6 * 1000),
+                ObjectAnimator.ofFloat(button, "translationY", 0, 500)//.setDuration(6 * 1000)
         );
         animatorSet.start();*/
-        ObjectAnimator.ofFloat(button, "translationX", 0, 500).setDuration(6 * 1000).start();
-        ObjectAnimator.ofFloat(button, "translationY", 0, 500).setDuration(6 * 1000).start();
+       /* ObjectAnimator.ofFloat(button, "translationX", 0, 500).setDuration(6 * 1000).start();
+        ObjectAnimator.ofFloat(button, "translationY", 0, 500).setDuration(6 * 1000).start();*/
 
 
-        //button.setTranslationX(300);
-        //button.setTranslationY(300);
+        button.setTranslationX(300);
+        button.setTranslationY(300);
 
     }
 
@@ -81,6 +92,7 @@ public class ViewMoveActivity extends AppCompatActivity {
 
     //setLayoutParams
     public void moveMethod3() {
+
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) button.getLayoutParams();
         lp.leftMargin = button.getLeft() + 500;
         lp.topMargin = button.getTop() + 500;
@@ -100,6 +112,7 @@ public class ViewMoveActivity extends AppCompatActivity {
         button.setTop(button.getTop() + 100);
         button.setBottom(button.getBottom() + 100);*/
     }
+
     /**
      * 其实这两个方法分别是对左右移动和上下移动的封装，传入的就是偏移量。
      */
