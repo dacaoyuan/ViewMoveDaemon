@@ -23,6 +23,7 @@ public class SlidingHidActivity extends AppCompatActivity {
     private Button mButton;
     private ScrollView mScrollView;
     private int mOriginButtonTop;
+    private int mOriginButtonBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class SlidingHidActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mOriginButtonTop = mButton.getTop();
+                mOriginButtonBottom = mButton.getBottom();
                 Log.i(TAG, "run: mOriginButtonTop=" + mOriginButtonTop);
 
             }
@@ -71,8 +73,16 @@ public class SlidingHidActivity extends AppCompatActivity {
                 if (isScrollDown) {
                     Log.i(TAG, "onScroll: 上移");
                     //下滑上移Button
-                    mButton.setTop(buttonTop - (int) Math.abs(distanceY));
-                    mButton.setBottom(buttonBottom - (int) Math.abs(distanceY));
+                    int top = buttonTop - (int) Math.abs(distanceY);
+                    int bottom = buttonBottom - (int) Math.abs(distanceY);
+                    if (top <= mOriginButtonTop) {
+                        top = mOriginButtonTop;
+                        bottom = mOriginButtonBottom;
+                    }
+                    mButton.setTop(top);
+                    mButton.setBottom(bottom);
+                    //mButton.setTop(buttonTop - (int) Math.abs(distanceY));
+                    //mButton.setBottom(buttonBottom - (int) Math.abs(distanceY));
                 } else if (!isScrollDown) {
                     Log.i(TAG, "onScroll: 下移");
                     //上滑下移Button
