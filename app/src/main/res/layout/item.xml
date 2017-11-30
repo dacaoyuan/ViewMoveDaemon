@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#eeeeee">
+
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:text="第一个item"
+            android:textColor="#646464"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="#d2d2d2" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -31,7 +31,7 @@ public class ViewMoveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_move);
         ButterKnife.bind(this);
-        moveMethod3();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,11 +44,16 @@ public class ViewMoveActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        // moveMethod4();
-        // moveMethod44();
-        // moveMethod3();
-        Log.i(TAG, "moveMethod1:移动后 getX()=" + button.getX() + " getY= " + button.getY());
-        Log.i(TAG, "moveMethod1:移动后 getLeft()=" + button.getLeft() + " getTop()= " + button.getTop());
+        moveMethod3();
+
+        button.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.i(TAG, "moveMethod1:移动后 getX()=" + button.getX() + " getY= " + button.getY());
+                Log.i(TAG, "moveMethod1:移动后 getLeft()=" + button.getLeft() + " getTop()= " + button.getTop());
+            }
+        });
+
     }
 
     //scrollTo,scrollBy
@@ -92,11 +97,15 @@ public class ViewMoveActivity extends AppCompatActivity {
 
     //setLayoutParams
     public void moveMethod3() {
+        Log.i(TAG, "moveMethod1:移动前 getX()=" + button.getX() + " getY= " + button.getY());
+        Log.i(TAG, "moveMethod1:移动前 getLeft()=" + button.getLeft() + " getTop()= " + button.getTop());
 
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) button.getLayoutParams();
         lp.leftMargin = button.getLeft() + 500;
-        lp.topMargin = button.getTop() + 500;
-        button.setLayoutParams(lp);
+        lp.topMargin = button.getTop() + 300;
+        //button.setLayoutParams(lp);
+        //或者
+       button.requestLayout();
 
     }
 

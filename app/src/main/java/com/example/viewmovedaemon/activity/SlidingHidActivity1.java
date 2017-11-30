@@ -2,9 +2,9 @@ package com.example.viewmovedaemon.activity;
 
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,54 +13,41 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.example.viewmovedaemon.MyGestureListener;
 import com.example.viewmovedaemon.R;
 
 /**
  * 滑动隐藏
  */
-public class SlidingHidActivity extends AppCompatActivity {
-    private static final String TAG = "SlidingHidActivity";
+public class SlidingHidActivity1 extends AppCompatActivity {
+    private static final String TAG = "SlidingHidActivity1";
     private GestureDetectorCompat mDetectorCompat;
     private Button mButton;
     private ScrollView mScrollView;
     private int mOriginButtonTop;
     private int mOriginButtonBottom;
 
-    private LinearLayout linearLayout;
-    private int mOriginLinearTop;
-    private int mOriginLinearBottom;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sliding_hid);
-        linearLayout = (LinearLayout) findViewById(R.id.linear);
+        setContentView(R.layout.activity_sliding_hid1);
 
         mButton = (Button) findViewById(R.id.button2);
-
-        linearLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mOriginLinearTop = linearLayout.getTop();
-                mOriginLinearBottom = linearLayout.getBottom();
-                Log.i(TAG, "run: mOriginLinearTop=" + mOriginLinearTop);
-
-            }
-        });
 
         mButton.post(new Runnable() {//post一个线程去获取button的原始top值
             @Override
             public void run() {
                 mOriginButtonTop = mButton.getTop();
                 mOriginButtonBottom = mButton.getBottom();
-                // Log.i(TAG, "run: mOriginButtonTop=" + mOriginButtonTop);
+                Log.i(TAG, "run: mOriginButtonTop=" + mOriginButtonTop);
 
             }
         });
 
         mScrollView = (ScrollView) findViewById(R.id.scrollView);
-        mDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
+         mDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
+        //mDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener(mButton, this, mOriginButtonTop, mOriginButtonBottom));
         mDetectorCompat.setIsLongpressEnabled(false);
 
         mScrollView.setOnTouchListener(new View.OnTouchListener() {
@@ -79,31 +66,20 @@ public class SlidingHidActivity extends AppCompatActivity {
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 
             if (Math.abs(distanceY) > Math.abs(distanceX)) {//判断是否竖直滑动
-                boolean isButtonTure = false;
 
                 int buttonTop = mButton.getTop();
                 int buttonBottom = mButton.getBottom();
-
-                int linearTop = linearLayout.getTop();
-                int linearBottom = linearLayout.getBottom();
-
                 //Log.i(TAG, "onScroll: buttonTop=" + buttonTop);
-                Log.i(TAG, "onScroll: linearTop=" + linearTop);
 
                 //是否向下滑动
                 boolean isScrollDown = e1.getRawY() < e2.getRawY() ? true : false;
 
                 //根据滑动方向和mButton当前的位置判断是否需要移动Button的位置
                 if (!ifNeedScroll(isScrollDown)) {
-                    isButtonTure = true;
-                    //return false;
+                    return false;
                 }
 
-                //根据滑动方向和linearLayout当前的位置判断是否需要移动LinearLayout的位置
-                if (!ifNeedScroll2(isScrollDown)) return false;
-
-
-                if (!isButtonTure && isScrollDown) {
+                if (isScrollDown) {
                     Log.i(TAG, "onScroll: 上移");
                     //下滑上移Button
                     int top = buttonTop - (int) Math.abs(distanceY);
@@ -116,32 +92,13 @@ public class SlidingHidActivity extends AppCompatActivity {
                     mButton.setBottom(bottom);
                     //mButton.setTop(buttonTop - (int) Math.abs(distanceY));
                     //mButton.setBottom(buttonBottom - (int) Math.abs(distanceY));
-                } else if (!isButtonTure && !isScrollDown) {
+                } else if (!isScrollDown) {
                     Log.i(TAG, "onScroll: 下移");
                     //上滑下移Button
                     mButton.setTop(buttonTop + (int) Math.abs(distanceY));
                     mButton.setBottom(buttonBottom + (int) Math.abs(distanceY));
                 }
 
-                if (isScrollDown) {
-                    Log.i(TAG, "onScroll: 下移");
-                    //下滑下移linearLayout
-                    int top = linearTop + (int) Math.abs(distanceY);
-                    int bottom = linearBottom + (int) Math.abs(distanceY);
-                    if (top >= mOriginLinearTop) {
-                        top = mOriginLinearTop;
-                        bottom = mOriginLinearBottom;
-                    }
-                    linearLayout.setTop(top);
-                    linearLayout.setBottom(bottom);
-                    //mButton.setTop(buttonTop - (int) Math.abs(distanceY));
-                    //mButton.setBottom(buttonBottom - (int) Math.abs(distanceY));
-                } else if (!isScrollDown) {
-                    Log.i(TAG, "onScroll: 上移");
-                    //上滑上移linearLayout
-                    linearLayout.setTop(linearTop - (int) Math.abs(distanceY));
-                    linearLayout.setBottom(linearBottom - (int) Math.abs(distanceY));
-                }
             }
 
             return super.onScroll(e1, e2, distanceX, distanceY);
@@ -158,22 +115,6 @@ public class SlidingHidActivity extends AppCompatActivity {
             //判断按钮是否在屏幕范围内，如果不在，则不需要再移动位置
             if (!isScrollDown) {
                 return isInScreen(mButton);
-            }
-
-            return true;
-        }
-
-        //写一个方法，根据滑动方向和linearBottom当前的位置，判断按钮是否应该继续滑动
-        private boolean ifNeedScroll2(boolean isScrollDown) {
-            int nowLinearTop = linearLayout.getTop();
-            Log.i(TAG, "ifNeedScroll: nowLinearTop=" + nowLinearTop + "  mOriginLinearTop=" + mOriginLinearTop);
-
-            //linearLayout不能超出原来的上边界
-            if (isScrollDown && nowLinearTop >= mOriginLinearTop) return false;
-
-            //判断按钮是否在屏幕范围内，如果不在，则不需要再移动位置
-            if (!isScrollDown) {
-                return isInScreen(linearLayout);
             }
 
             return true;

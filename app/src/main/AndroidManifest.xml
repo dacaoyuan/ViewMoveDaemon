@@ -18,7 +18,10 @@
         </activity>
         <activity android:name=".activity.GestureDetectorActivity" />
         <activity android:name=".activity.ViewMoveActivity" />
-        <activity android:name=".activity.SlidingHidActivity"></activity>
+        <activity android:name=".activity.SlidingHidActivity1" />
+        <activity android:name=".activity.SlidingHidActivity2" />
+        <activity android:name=".activity.SlidingHidActivity" />
+        <activity android:name=".activity.SlidingHidActivity3" />
     </application>
 
 </manifest>

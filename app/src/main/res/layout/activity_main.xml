@@ -22,7 +22,26 @@
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="滑动隐藏" />
+        android:text="滑动隐藏1" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="滑动隐藏2" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="滑动隐藏12结合" />
+
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="滑动隐藏3结合" />
 
 
 </LinearLayout>
