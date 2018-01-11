@@ -70,5 +70,11 @@
         android:layout_height="wrap_content"
         android:text="其他" />
 
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="滑动时的渐变隐藏和渐变显示" />
+
 
 </LinearLayout>

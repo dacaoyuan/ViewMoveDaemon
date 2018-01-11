@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="px_500">-500px</dimen>
+
+    <dimen name="home_page_list_item_margin_top">50dp</dimen>
+
+    <dimen name="home_page_banner_height">150dp</dimen>
+
+
 </resources>

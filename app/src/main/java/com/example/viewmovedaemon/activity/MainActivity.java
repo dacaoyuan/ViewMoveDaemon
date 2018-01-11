@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.button9)
     Button button9;
+    @BindView(R.id.button10)
+    Button button10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ElseActivity.class));
+            }
+        });
+
+        button10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SlidingGradientHidActivity.class));
             }
         });
 

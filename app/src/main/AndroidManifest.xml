@@ -24,7 +24,8 @@
         <activity android:name=".activity.SlidingHidActivity3" />
         <activity android:name=".activity.ElseActivity" />
         <activity android:name=".activity.ScrollActivity" />
-        <activity android:name=".activity.SlidingHid2Activity2"></activity>
+        <activity android:name=".activity.SlidingHid2Activity2" />
+        <activity android:name=".activity.SlidingGradientHidActivity"></activity>
     </application>
 
 </manifest>
