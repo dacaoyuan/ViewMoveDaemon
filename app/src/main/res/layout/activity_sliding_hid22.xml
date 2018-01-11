@@ -17,13 +17,11 @@
 
     </LinearLayout>
 
-    <com.example.viewmovedaemon.view.SmartScrollView
+    <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_below="@id/linear">
 
 
         <!--可滑动的ScrollView-->
@@ -37,7 +35,7 @@
             android:paddingTop="250dp"
             android:text="可滑动的ScrollView" />
 
-    </com.example.viewmovedaemon.view.SmartScrollView>
+    </ScrollView>
 
 
 </RelativeLayout>

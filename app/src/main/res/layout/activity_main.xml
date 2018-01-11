@@ -24,11 +24,26 @@
         android:layout_height="wrap_content"
         android:text="滑动隐藏1" />
 
-    <Button
-        android:id="@+id/button4"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="滑动隐藏2" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="滑动隐藏2(方式一)" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="滑动隐藏2(方式二)" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/button5"
@@ -42,6 +57,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="滑动隐藏3结合" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="scrollView 判断滚动到顶底部" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="其他" />
 
 
 </LinearLayout>

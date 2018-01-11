@@ -25,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
     Button button5;
     @BindView(R.id.button6)
     Button button6;
+    @BindView(R.id.button7)
+    Button button7;
+    @BindView(R.id.button8)
+    Button button8;
+
+    @BindView(R.id.button9)
+    Button button9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SlidingHidActivity2.class));
             }
         });
+        button9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SlidingHid2Activity2.class));
+            }
+        });
 
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +84,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SlidingHidActivity3.class));
+            }
+        });
+        button8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ScrollActivity.class));
+            }
+        });
+        button7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ElseActivity.class));
             }
         });
 
