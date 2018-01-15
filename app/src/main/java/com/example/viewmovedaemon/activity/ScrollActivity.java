@@ -3,6 +3,7 @@ package com.example.viewmovedaemon.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.example.viewmovedaemon.R;
 import com.example.viewmovedaemon.view.SmartScrollView;
@@ -34,6 +35,10 @@ public class ScrollActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
 
       /*  if (scrollView.isScrolledToTop()) {
             Log.i(TAG, "onCreate: isScrolledToTop 顶部");
