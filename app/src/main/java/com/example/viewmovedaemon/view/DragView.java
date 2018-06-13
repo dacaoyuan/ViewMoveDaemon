@@ -2,6 +2,7 @@ package com.example.viewmovedaemon.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -9,6 +10,7 @@ import android.view.View;
  * Created by yuanpk on 2017/11/29.
  */
 public class DragView extends View {
+    private static final String TAG = "DragView";
     private int lastX;
     private int lastY;
 
@@ -20,6 +22,7 @@ public class DragView extends View {
         //获取到手指处的横坐标和纵坐标
         int x = (int) event.getX();
         int y = (int) event.getY();
+        //Log.i(TAG, "onTouchEvent: x= " + x + " y= " + y);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 lastX = x;

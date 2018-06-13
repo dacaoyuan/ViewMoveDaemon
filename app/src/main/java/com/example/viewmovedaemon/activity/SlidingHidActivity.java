@@ -78,6 +78,7 @@ public class SlidingHidActivity extends AppCompatActivity {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 
+
             if (Math.abs(distanceY) > Math.abs(distanceX)) {//判断是否竖直滑动
                 boolean isButtonTure = false;
 
