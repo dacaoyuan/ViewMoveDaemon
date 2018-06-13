@@ -52,7 +52,7 @@ public class ViewMoveActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        //moveMethod2();
+        moveMethod3();
 
 
         //你移动后，它还是获取的是原始状态时相对于父容器的坐标。因此前后的值是一样的。
@@ -234,9 +234,9 @@ public class ViewMoveActivity extends AppCompatActivity {
          */
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(
-                ObjectAnimator.ofFloat(view, "scaleX", 2f).setDuration(2 * 1000),
-                ObjectAnimator.ofFloat(view, "scaleY", 2f).setDuration(2 * 1000),
-                ObjectAnimator.ofFloat(view, "alpha", 0.1f).setDuration(2 * 1000)
+                ObjectAnimator.ofFloat(view, "scaleX", 0f).setDuration(2 * 1000),
+                ObjectAnimator.ofFloat(view, "scaleY", 0f).setDuration(2 * 1000),
+                ObjectAnimator.ofFloat(view, "alpha", 0f).setDuration(2 * 1000)
         );
         animatorSet.setInterpolator(new FastOutLinearInInterpolator());
         animatorSet.addListener(new Animator.AnimatorListener() {
