@@ -10,6 +10,7 @@ import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class ViewMoveActivity extends AppCompatActivity {
                 animationSummary(v);
             }
         });
+
+
         //linear.smoothScrollTo(-500, -500, 9);
     }
 
@@ -260,7 +263,7 @@ public class ViewMoveActivity extends AppCompatActivity {
                 Log.i(TAG, "onAnimationRepeat: ");
             }
         });
-        
+
         animatorSet.start();
 
        /* ObjectAnimator scaleXObject = ObjectAnimator.ofFloat(view, "scaleX", 0f);
@@ -376,6 +379,7 @@ public class ViewMoveActivity extends AppCompatActivity {
 
                     }
                 }).start();*/
+
 
 
     }
