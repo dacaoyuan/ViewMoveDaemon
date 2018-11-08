@@ -1,26 +1,20 @@
 package com.example.viewmovedaemon.activity;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ViewAnimator;
 
 import com.example.viewmovedaemon.R;
 import com.example.viewmovedaemon.view.CustomLinearLayout;
+import com.example.viewmovedaemon.view.DragView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +27,8 @@ public class ViewMoveActivity extends AppCompatActivity {
     Button button;
     @BindView(R.id.linear)
     CustomLinearLayout linear;
+    @BindView(R.id.dragView)
+    DragView mDragView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,7 +231,7 @@ public class ViewMoveActivity extends AppCompatActivity {
         /**
          * 缩放
          */
-        AnimatorSet animatorSet = new AnimatorSet();
+        /*AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(
                 ObjectAnimator.ofFloat(view, "scaleX", 0f).setDuration(2 * 1000),
                 ObjectAnimator.ofFloat(view, "scaleY", 0f).setDuration(2 * 1000),
@@ -264,7 +260,7 @@ public class ViewMoveActivity extends AppCompatActivity {
             }
         });
 
-        animatorSet.start();
+        animatorSet.start();*/
 
        /* ObjectAnimator scaleXObject = ObjectAnimator.ofFloat(view, "scaleX", 0f);
         scaleXObject.setDuration(4 * 1000);
@@ -380,6 +376,27 @@ public class ViewMoveActivity extends AppCompatActivity {
                     }
                 }).start();*/
 
+
+        /**
+         * 揭露动画
+         * >=Android5.0 API>=21才可以使用
+         createCircularReveal (View view,  动画作用的View
+         int centerX,      圆中心的x坐标
+         int centerY,      圆中心的y坐标
+         float startRadius, 圆的开始半径
+         float endRadius)   圆的结束半径
+         */
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Animator animator = ViewAnimationUtils.createCircularReveal
+                    (mDragView,
+                            mDragView.getWidth() / 2,
+                            mDragView.getHeight() / 2,
+                            0,
+                            mDragView.getHeight());
+            animator.setDuration(3 * 1000);
+            animator.start();
+        }
 
 
     }

@@ -13,6 +13,7 @@
         android:visibility="gone" />
 
     <com.example.viewmovedaemon.view.DragView
+        android:id="@+id/dragView"
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:background="#e6b0b0" />
