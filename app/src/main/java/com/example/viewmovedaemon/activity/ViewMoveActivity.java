@@ -36,6 +36,7 @@ public class ViewMoveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_move);
         ButterKnife.bind(this);
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +54,7 @@ public class ViewMoveActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
         moveMethod3();
 
+        animationSummary(button);//如果想一打开就展示揭露动画的话，需要在这个方法内，使用揭露动画
 
         //你移动后，它还是获取的是原始状态时相对于父容器的坐标。因此前后的值是一样的。
         button.post(new Runnable() {
