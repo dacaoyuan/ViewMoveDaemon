@@ -1,15 +1,22 @@
 package com.example.viewmovedaemon.activity;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.viewmovedaemon.R;
@@ -30,6 +37,9 @@ public class ViewMoveActivity extends AppCompatActivity {
     @BindView(R.id.dragView)
     DragView mDragView;
 
+    @BindView(R.id.imageView)
+    ImageView mImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +51,93 @@ public class ViewMoveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ViewMoveActivity.onClick");
-                animationSummary(v);
+                //animationSummary(v);
+
+                likeAnimation(mImageView);
             }
         });
 
 
         //linear.smoothScrollTo(-500, -500, 9);
     }
+
+
+    private void likeAnimation(final View view) {
+
+        view.setVisibility(View.VISIBLE);
+
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(
+                ObjectAnimator.ofFloat(view, "scaleX", 2f, 1f).setDuration(1 * 1000),
+                ObjectAnimator.ofFloat(view, "scaleY", 2f, 1f).setDuration(1 * 1000)
+
+                //ObjectAnimator.ofFloat(view, "alpha", 0f).setDuration(2 * 1000)
+        );
+        //animatorSet.setInterpolator(new FastOutLinearInInterpolator());
+        //animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+        // animatorSet.setInterpolator(new AnticipateOvershootInterpolator());//其变化开始向后甩，然后向前甩，过冲到目标值，最后又回到了终值
+        animatorSet.setInterpolator(new BounceInterpolator());//其变化在结束时反弹
+
+        animatorSet.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.i(TAG, "onAnimationStart: ");
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.i(TAG, "onAnimationEnd: ");
+
+
+                ObjectAnimator objectAnimator = ObjectAnimator
+                        .ofFloat(view, "alpha", 0f)
+                        .setDuration(1 * 1000);
+
+                objectAnimator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        Log.i(TAG, "onAnimationEnd: ");
+                        view.setVisibility(View.GONE);
+                        view.setAlpha(1f);//切记：在动画执行完毕后，要把控件的透明度在设置回来，这样每次点击都有效果。
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                objectAnimator.start();
+
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                Log.i(TAG, "onAnimationRepeat: ");
+            }
+        });
+
+        animatorSet.start();
+
+
+    }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
