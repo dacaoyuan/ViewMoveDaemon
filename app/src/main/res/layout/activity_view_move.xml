@@ -25,7 +25,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_manger_my_collection"
-        android:visibility="gone"
+        android:visibility="invisible"
         tools:visibility="visible"/>
 
     <Button

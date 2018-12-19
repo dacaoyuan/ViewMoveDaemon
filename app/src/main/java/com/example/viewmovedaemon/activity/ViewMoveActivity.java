@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
@@ -76,6 +77,7 @@ public class ViewMoveActivity extends AppCompatActivity {
         );
         //animatorSet.setInterpolator(new FastOutLinearInInterpolator());
         //animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+        //animatorSet.setInterpolator(new AnticipateInterpolator());
         // animatorSet.setInterpolator(new AnticipateOvershootInterpolator());//其变化开始向后甩，然后向前甩，过冲到目标值，最后又回到了终值
         animatorSet.setInterpolator(new BounceInterpolator());//其变化在结束时反弹
 
@@ -104,7 +106,7 @@ public class ViewMoveActivity extends AppCompatActivity {
                     public void onAnimationEnd(Animator animation) {
                         Log.i(TAG, "onAnimationEnd: ");
                         view.setVisibility(View.GONE);
-                        view.setAlpha(1f);//切记：在动画执行完毕后，要把控件的透明度在设置回来，这样每次点击都有效果。
+                        view.setAlpha(1f);//切记：在动画执行完毕后，要把控件的透明度再设置回来，这样每次点击都有效果。
                     }
 
                     @Override
