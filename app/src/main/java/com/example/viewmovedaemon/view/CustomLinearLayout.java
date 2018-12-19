@@ -13,8 +13,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
+
+import com.example.viewmovedaemon.R;
 
 /**
  * Created by yuanpk on 2017/11/29.
@@ -57,10 +60,11 @@ public class CustomLinearLayout extends LinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         x = event.getX();
         y = event.getY();
+
         /**
          * 点击水波纹效果
          */
-        ObjectAnimator rippleAnimator = ObjectAnimator.ofFloat(this, "radius", 0f, 1f).setDuration(1000);
+        ObjectAnimator rippleAnimator = ObjectAnimator.ofFloat(this, "radius", 0f, 1f).setDuration(2000);
         rippleAnimator.start();
 
         return super.onTouchEvent(event);
@@ -88,9 +92,8 @@ public class CustomLinearLayout extends LinearLayout {
         }
         //方便刷新透明度
        mPaint.setARGB(alpha, 0, 125, 251);
-
-
-
+        mPaint.setTextSize(50);
+        //canvas.drawText("袁培凯",x,y,mPaint);
         canvas.drawCircle(x, y, radius, mPaint);
     }
 
